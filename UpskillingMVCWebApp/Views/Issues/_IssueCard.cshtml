@@ -1,0 +1,12 @@
+﻿@model UpskillingMVCWebApp.Models.IssueDto
+
+<div class="issue-card issue-card-@(Model.Status.ToString().ToLower())">
+    <a class="issue-card-button" asp-controller="issues" asp-action="Edit" asp-route-id="@Model?.Id">
+        <div class="issue-card-description">
+            <div class="issue-card-title">
+                @Html.DisplayFor(model => model.Title)
+            </div>
+        </div>
+    </a>
+</div>
+

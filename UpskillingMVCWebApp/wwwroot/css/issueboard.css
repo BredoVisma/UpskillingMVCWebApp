@@ -1,0 +1,17 @@
+﻿body {
+}
+
+.issue-board{
+    margin: 10px;
+    border: groove;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+td {
+    border-right: 1px dashed black;
+    overflow: hidden; /* optional*/
+}

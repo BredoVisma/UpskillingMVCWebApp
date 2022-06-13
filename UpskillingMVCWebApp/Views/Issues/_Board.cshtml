@@ -1,0 +1,41 @@
+﻿@using System.Diagnostics
+@using System.Reflection
+@using System.ComponentModel.DataAnnotations
+@using UpskillingMVCWebApp.Data.Enums
+@model IEnumerable<UpskillingMVCWebApp.Models.IssueDto>
+
+@{
+    var statusNames = Enum.GetValues(typeof(IssueStatus)).Cast<IssueStatus>();
+    Debug.WriteLine("Status names: " + string.Join(", ", statusNames));
+}
+
+<div class="issue-board">
+    <table class="table">
+        <thead>
+            <tr>
+                @foreach (var statusName in statusNames)
+                {
+                    var statusDisplayName = statusName.GetType()
+                                            .GetMember(statusName.ToString()).FirstOrDefault()?
+                                            .GetCustomAttribute<DisplayAttribute>()?
+                                            .GetName();
+                    <td>@statusDisplayName</td>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach(var statusName in statusNames)
+                {
+                    <td>
+                        @foreach(var issue in Model.Where(issue => issue.Status == statusName))
+                        {
+                            <partial name="./_IssueCard.cshtml" model="issue"/>
+                        }
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+</div>
+

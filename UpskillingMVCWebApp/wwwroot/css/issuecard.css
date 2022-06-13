@@ -1,0 +1,57 @@
+﻿body {
+}
+
+.issue-card{
+    margin: 10px;
+    border: dashed;
+    width: 95%;
+    height: 120px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.issue-card::-webkit-scrollbar{
+    display: none;
+}
+
+.issue-card{
+    -ms-overflow-style: none;
+}
+
+.issue-card:hover{
+    opacity: 0.8;
+}
+
+.issue-card-description {
+    margin: 10px;
+}
+
+.issue-card-title {
+    overflow-wrap: normal;
+    font-weight: bold;
+}
+
+.issue-card-none{
+    background-color: whitesmoke;
+}
+
+.issue-card-todo{
+    background-color: lightskyblue;
+}
+
+.issue-card-inprogress{
+    background-color: burlywood;
+}
+
+.issue-card-review{
+    background-color: cornsilk;
+}
+
+.issue-card-done {
+    background-color: lightgreen;
+}
+
+.issue-card-button{
+    text-decoration: none;
+    color: inherit;
+}
