@@ -56,9 +56,22 @@ namespace UpskillingMVCWebApp.Controllers
         }
 
         // GET: Issues/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(Guid? projectId)
         {
-            return View();
+            var projectEntities = await _context.Projects.ToListAsync();
+            var projects = _mapper.Map<IEnumerable<ProjectDto>>(projectEntities);
+            if (projects == null)
+                return Problem("Could not load projects");
+
+            ViewBag.Projects = projects;
+
+
+            var model = new IssueDto
+            {
+                ProjectId = projectId ?? Guid.Empty,
+            };
+
+            return View(model);
         }
 
         // POST: Issues/Create
@@ -66,18 +79,21 @@ namespace UpskillingMVCWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,CreatedDate,UpdatedDate,Status")] Data.Entities.Issue issue)
+        public async Task<IActionResult> Create([Bind("ProjectId,Title,Description,Status")] IssueDto issue)
         {
             if (ModelState.IsValid)
             {
-                issue.Id = Guid.NewGuid();
-                _context.Add(issue);
+                var issueEntity = _mapper.Map<Issue>(issue);
+                issueEntity.Id = Guid.NewGuid();
+                issueEntity.CreatedDate = DateTime.UtcNow;
+                issueEntity.UpdatedDate = DateTime.UtcNow;
+                _context.Add(issueEntity);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Projects", new { id = issue.ProjectId });
             }
-            var model = _mapper.Map<IssueDto>(issue);
 
-            return View(model);
+            return View(issue);
+
         }
 
         // GET: Issues/Edit/5

@@ -35,17 +35,6 @@ namespace UpskillingMVCWebApp.Controllers
             return Problem("Entity set 'ProjectContext.Projects'  is null.");
         }
 
-        // GET: Projects
-        public async Task<IActionResult> Dropdown()
-        {
-            if (_context.Projects != null)
-            {
-                var projects = await _context.Projects.ToListAsync();
-                return View(projects);
-            }
-            return Problem("Entity set 'ProjectContext.Projects'  is null.");
-        }
-
         // GET: Projects/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {

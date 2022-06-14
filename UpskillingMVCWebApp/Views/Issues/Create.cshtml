@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Create new issue";
+    IEnumerable<ProjectDto> projects = ViewBag.Projects;
 }
 
 <h1>Create</h1>
@@ -13,6 +14,11 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProjectId" class="control-label"></label>
+                <select asp-for="ProjectId" class="form-control" asp-items="@(new SelectList(projects, "ProjectId", "Name"))"></select>
+                <span asp-validation-for="ProjectId" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />

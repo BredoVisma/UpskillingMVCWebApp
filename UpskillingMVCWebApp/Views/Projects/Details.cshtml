@@ -20,7 +20,7 @@
     <h4>Board</h4>
     <partial name="../Issues/_Board" model="Model.Issues"/>
     <p>
-        <a asp-controller="Issues" asp-action="Create">Create New Issue</a>
+        <a asp-controller="Issues" asp-action="Create" asp-route-projectId="@Model.ProjectId">Create New Issue</a>
     </p>
 
     <h4>Details</h4>
