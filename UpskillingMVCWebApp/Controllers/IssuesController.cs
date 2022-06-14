@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -162,6 +163,9 @@ namespace UpskillingMVCWebApp.Controllers
         // GET: Issues/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
+            RequestHeaders headers = Request.GetTypedHeaders(); 
+            ViewBag.ReturnUrl = headers.Referer?.AbsoluteUri;
+
             if (id == null || _context.Issues == null)
             {
                 return NotFound();

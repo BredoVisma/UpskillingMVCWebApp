@@ -6,12 +6,12 @@
     border: groove;
 }
 
-table {
+.issue-board table {
     table-layout: fixed;
     width: 100%;
 }
 
-td {
+.issue-board td {
     border-right: 1px dashed black;
     overflow: hidden; /* optional*/
 }
