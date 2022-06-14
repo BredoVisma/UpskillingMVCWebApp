@@ -1,7 +1,13 @@
 ﻿body {
 }
 
+.project-list table {
+    table-layout: fixed;
+    width: 100%;
+}
+
 .project-list td {
+    max-width: 20%;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
